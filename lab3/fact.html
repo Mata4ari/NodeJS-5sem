@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <p id ="result"></p>
+    <script>
+        function fetchName (){
+            let startTime = Date.now();
+            for(let k=0;k<21;k++){
+            fetch(`http://localhost:5000/fact?k=${k}`)
+                .then(response => response.json())
+                .then(data => {
+                    let endTime = Date.now();
+                    const result = document.getElementById('result');
+                    result.innerHTML += `${k}.Результат: ${endTime-startTime}-${k}/${data.fact}<br>`; 
+                })
+                .catch(error => console.error('Ошибка:', error));
+            }
+        };
+        fetchName();
+    </script>
+</body>
+</html>
